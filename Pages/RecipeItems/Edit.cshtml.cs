@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AddLineTest.Model;
 
-namespace AddLineTest.Views
+namespace AddLineTest.Pages.RecipeItems
 {
     public class EditModel : PageModel
     {

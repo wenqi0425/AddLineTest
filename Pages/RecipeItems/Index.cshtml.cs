@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AddLineTest.Model;
 
-namespace AddLineTest.Views
+namespace AddLineTest.Pages.RecipeItems
 {
     public class IndexModel : PageModel
     {
-        private readonly AppDbContext _context;
+        private readonly AddLineTest.Model.AppDbContext _context;
 
-        public IndexModel(AppDbContext context)
+        public IndexModel(AddLineTest.Model.AppDbContext context)
         {
             _context = context;
         }

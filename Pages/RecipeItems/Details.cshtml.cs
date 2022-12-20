@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AddLineTest.Model;
 
-namespace AddLineTest.Views
+namespace AddLineTest.Pages.RecipeItems
 {
     public class DetailsModel : PageModel
     {
