@@ -10,30 +10,30 @@
 <h1>Create RecipeItem</h1>
 
 <div id="ingredient" class="form-group col-sm-8">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <table class="table" id="recipeitem">
-                <thead>
-                    <tr>
-                        <th> Ingredient</th>
-                        <th> Amount</th>
-                        <th> Add </th>
-                        <th> Delete </th>
-                    </tr>
-                </thead>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <table class="table" id="recipeitem">
+            <thead>
+                <tr>
+                    <th> Ingredient</th>
+                    <th> Amount</th>
+                    <th> Add </th>
+                    <th> Delete </th>
+                </tr>
+            </thead>
 
-                <tbody>
-                    <tr class="data-recipeitem">
-                        <td><input type="text" name="ingredient" class="form-control ingredient01" /></td>
-                        <td><input type="text" name="amount" class="form-control amount01" /></td>
-                        <td><button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">+</button></td>
-                        <td><button type="button" id="btnDelete" class="btn btn-xs btn-danger classDelete">-</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-        <div class="form-group"><input type="submit" value="Create" class="btn btn-primary" /></div>
-    </div>
+            <tbody>
+                <tr class="data-recipeitem">
+                    <td><input type="text" name="ingredient" class="form-control ingredient01" /></td>
+                    <td><input type="text" name="amount" class="form-control amount01" /></td>
+                    <td><button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">+</button></td>
+                    <td><button type="button" @*id="btnDelete"*@ class="btn btn-xs btn-danger classDelete">-</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="form-group"><input type="submit" value="Create" class="btn btn-primary" /></div>
+</div>
 
 
 <div> <a asp-page="Index">Back to List</a> </div>
@@ -41,20 +41,14 @@
 
 <script type="text/javascript">
     // Get the button element
-    var button = document.getElementById("btnAdd");
+    var addButton = document.getElementById("btnAdd");
 
     // Add an event listener to the button to listen for clicks
-    button.addEventListener("click", addLine);
+    addButton.addEventListener("click", addLine);
 
     function addLine() {
         //Get the div element
         var ingredientTable = document.getElementById("ingredient");
-
-        //Create a new <br> element
-        var br = document.createElement("br");
-
-        //Append the <br> element to the div
-        ingredientTable.appendChild(br);
 
         // Get the tbody element
         var tableBody = ingredientTable.getElementsByTagName("tbody")[0];
@@ -80,18 +74,40 @@
         amountInput.placeholder = "Enter Amount";
         amountCell.appendChild(amountInput);
 
+        // Create - button
+        var deleteCell = document.createElement("td");
+        var minusButton = document.createElement("button");
+        minusButton.innerHTML = "-";
+        minusButton.classList.add("classDelete");
+        deleteCell.appendChild(minusButton);
+
         // Append cells to the new row
         newRow.appendChild(ingredientCell);
         newRow.appendChild(amountCell);
+        newRow.appendChild(deleteCell);
 
         // Append new row to the table body
         tableBody.appendChild(newRow);
 
-        ////Create a new text node with the new line text
-        //var newLineText = document.createTextNode("This is the new line");
+        // Add an event listener to the new delete button
+        minusButton.addEventListener("click", deleteLine);
+    }
 
-        ////Append the new line text to the div
-        //ingredientTable.appendChild(newLineText);
+    // Add event listeners to all existing delete buttons
+    var deleteButtons = document.getElementsByClassName("classDelete");
+    for (var i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener("click", deleteLine);
+    }
+
+    function deleteLine() {
+        // Get the clicked button
+        var button = this;
+
+        // Get the parent row
+        var row = button.parentNode.parentNode;
+
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
     }
 </script>
 
@@ -100,3 +116,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
