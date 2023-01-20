@@ -8,6 +8,7 @@ namespace AddLineTest.Services.Interfaces
         void AddRecipeItem(RecipeItem recipe);
         void DeleteRecipeItem(RecipeItem recipe);
         void EditRecipeItem(RecipeItem recipe);
-        IEnumerable<RecipeItem> GetRecipeItemsByRecipeId(int recipeId);
+        RecipeItem GetRecipeItemsById(int recipeItemId);
+        IEnumerable<RecipeItem> GetAllRecipeItems();
     }
 }

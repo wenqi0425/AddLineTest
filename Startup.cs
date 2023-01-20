@@ -1,4 +1,7 @@
 using AddLineTest.Model;
+using AddLineTest.Services.EFServices;
+using AddLineTest.Services.Interfaces;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +32,8 @@ namespace AddLineTest
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("LocalConnection")));
+
+            services.AddTransient<IRecipeItemService, EFRecipeItemService>();
 
             services.AddRazorPages();
         }

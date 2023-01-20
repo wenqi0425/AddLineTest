@@ -1,10 +1,12 @@
 ﻿using AddLineTest.Model;
+using AddLineTest.Services.Interfaces;
+
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AddLineTest.Services.EFServices
 {
-    public class EFRecipeItemService
+    public class EFRecipeItemService : IRecipeItemService
     {
         AppDbContext _context;
         public EFRecipeItemService(AppDbContext context)
@@ -28,6 +30,16 @@ namespace AddLineTest.Services.EFServices
         {
             _context.RecipeItems.Update(recipeItem);
             _context.SaveChanges();
+        }
+
+        public IEnumerable<RecipeItem> GetAllRecipeItems()
+        {
+            return _context.RecipeItems;
+        }
+
+        public RecipeItem GetRecipeItemsById(int recipeItemId)
+        {
+            return _context.RecipeItems.FirstOrDefault(r => r.Id == recipeItemId);
         }
     }
 }
