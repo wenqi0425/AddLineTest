@@ -5,35 +5,98 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "formxmldata", @enctype = "multipart/form-data" }))
+{*@
+<h1>Create RecipeItem</h1>
 
-<h4>RecipeItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div id="ingredient" class="form-group col-sm-8">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RecipeItem.Name" class="control-label"></label>
-                <input asp-for="RecipeItem.Name" class="form-control" />
-                <span asp-validation-for="RecipeItem.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RecipeItem.Amount" class="control-label"></label>
-                <input asp-for="RecipeItem.Amount" class="form-control" />
-                <span asp-validation-for="RecipeItem.Amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            <table class="table" id="recipeitem">
+                <thead>
+                    <tr>
+                        <th> Ingredient</th>
+                        <th> Amount</th>
+                        <th> Add </th>
+                        <th> Delete </th>
+                    </tr>
+                </thead>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+                <tbody>
+                    <tr class="data-recipeitem">
+                        <td><input type="text" name="ingredient" class="form-control ingredient01" /></td>
+                        <td><input type="text" name="amount" class="form-control amount01" /></td>
+                        <td><button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">+</button></td>
+                        <td><button type="button" id="btnDelete" class="btn btn-xs btn-danger classDelete">-</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="form-group"><input type="submit" value="Create" class="btn btn-primary" /></div>
+    </div>
+
+
+<div> <a asp-page="Index">Back to List</a> </div>
+@*}*@
+
+<script type="text/javascript">
+    // Get the button element
+    var button = document.getElementById("btnAdd");
+
+    // Add an event listener to the button to listen for clicks
+    button.addEventListener("click", addLine);
+
+    function addLine() {
+        //Get the div element
+        var ingredientTable = document.getElementById("ingredient");
+
+        //Create a new <br> element
+        var br = document.createElement("br");
+
+        //Append the <br> element to the div
+        ingredientTable.appendChild(br);
+
+        // Get the tbody element
+        var tableBody = ingredientTable.getElementsByTagName("tbody")[0];
+
+        // Create a new row element
+        var newRow = document.createElement("tr");
+
+        // Create the ingredient and amount cells
+        var ingredientCell = document.createElement("td");
+        var amountCell = document.createElement("td");
+
+        // Create input element for ingredient
+        var ingredientInput = document.createElement("input");
+        ingredientInput.type = "text";
+        ingredientInput.name = "ingredient";
+        ingredientInput.placeholder = "Enter Ingredient";
+        ingredientCell.appendChild(ingredientInput);
+
+        // Create input element for amount
+        var amountInput = document.createElement("input");
+        amountInput.type = "text";
+        amountInput.name = "amount";
+        amountInput.placeholder = "Enter Amount";
+        amountCell.appendChild(amountInput);
+
+        // Append cells to the new row
+        newRow.appendChild(ingredientCell);
+        newRow.appendChild(amountCell);
+
+        // Append new row to the table body
+        tableBody.appendChild(newRow);
+
+        ////Create a new text node with the new line text
+        //var newLineText = document.createTextNode("This is the new line");
+
+        ////Append the new line text to the div
+        //ingredientTable.appendChild(newLineText);
+    }
+</script>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -11,9 +11,9 @@ namespace AddLineTest.Pages.RecipeItems
 {
     public class CreateModel : PageModel
     {
-        private readonly AddLineTest.Model.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public CreateModel(AddLineTest.Model.AppDbContext context)
+        public CreateModel(AppDbContext context)
         {
             _context = context;
         }

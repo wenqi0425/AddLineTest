@@ -14,27 +14,34 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="RecipeItem.Id" />
-            <div class="form-group">
-                <label asp-for="RecipeItem.Name" class="control-label"></label>
-                <input asp-for="RecipeItem.Name" class="form-control" />
-                <span asp-validation-for="RecipeItem.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RecipeItem.Amount" class="control-label"></label>
-                <input asp-for="RecipeItem.Amount" class="form-control" />
-                <span asp-validation-for="RecipeItem.Amount" class="text-danger"></span>
-            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> Ingredient</th>
+                        <th> Amout</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input asp-for="@Model.RecipeItem.Name" class="form-control" /></td>
+                        <td><input asp-for="@Model.RecipeItem.Amount" class="form-control" /></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
