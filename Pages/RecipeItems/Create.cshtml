@@ -5,12 +5,10 @@
     ViewData["Title"] = "Create";
 }
 
-@*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "formxmldata", @enctype = "multipart/form-data" }))
-{*@
 <h1>Create RecipeItem</h1>
 
 <div id="ingredient" class="form-group col-sm-8">
-    <form method="post">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <table class="table" id="recipeitem">
             <thead>
